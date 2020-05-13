@@ -6,29 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>一种快速搭建个人博客网站的方式 | Hexo</title>
+  <title>Linux服务器启动Tomcat本地无法访问 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一章介绍一个开源的个人博客框架hexo，展示如何使用它快速搭建个人博客，并发布 准备 Node环境  Git工具  GitHub账号">
+  <meta name="description" content="阿里云Linux服务器启动Tomcat本地无法访问[TOC] 描述记录一次linux开启Tomcat，在本地主机浏览器无法访问的问题。查了很多博客，大概的原因有：  java环境是否安装正确 Tomcat是否启动 Linux服务器防火墙，是否开放了Tomcat运行端口（默认8080）  java环境Xshell进入linux系统，输入： 1java -version  若出现  表明已经安装jdk">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一种快速搭建个人博客网站的方式">
-<meta property="og:url" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:title" content="Linux服务器启动Tomcat本地无法访问">
+<meta property="og:url" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一章介绍一个开源的个人博客框架hexo，展示如何使用它快速搭建个人博客，并发布 准备 Node环境  Git工具  GitHub账号">
+<meta property="og:description" content="阿里云Linux服务器启动Tomcat本地无法访问[TOC] 描述记录一次linux开启Tomcat，在本地主机浏览器无法访问的问题。查了很多博客，大概的原因有：  java环境是否安装正确 Tomcat是否启动 Linux服务器防火墙，是否开放了Tomcat运行端口（默认8080）  java环境Xshell进入linux系统，输入： 1java -version  若出现  表明已经安装jdk">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951346638.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951043333.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951493651.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581952143237.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581952318509.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581996334437.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953010935.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953089980.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953253034.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953684839.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953854742.png">
-<meta property="og:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581954376614.png">
-<meta property="article:published_time" content="2020-02-17T13:48:47.000Z">
-<meta property="article:modified_time" content="2020-02-19T03:03:23.846Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589174695077.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589175161263.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176292201.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176009254.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176194761.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176611743.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176696960.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177252176.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177339255.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177537203.png">
+<meta property="article:published_time" content="2020-05-11T06:11:25.995Z">
+<meta property="article:modified_time" content="2020-05-11T06:12:45.949Z">
 <meta property="article:author" content="chenhr24">
 <meta property="article:tag" content="前端博客，后端博客，java">
 <meta property="article:tag" content="vue.js">
@@ -36,7 +34,7 @@
 <meta property="article:tag" content="html5">
 <meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951346638.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589174695077.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -172,14 +170,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-一种快速搭建个人博客网站的方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Linux服务器启动Tomcat本地无法访问" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      一种快速搭建个人博客网站的方式
+      Linux服务器启动Tomcat本地无法访问
     </h1>
   
 
@@ -194,8 +192,8 @@
   </a>
 
         
-        <a href="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-02-17T13:48:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
+        <a href="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/" class="archive-article-date">
+  	<time datetime="2020-05-11T06:11:25.995Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-11</time>
 </a>
 
 	<!-- 不蒜子统计 -->
@@ -208,100 +206,98 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>介绍一个开源的个人博客框架hexo，展示如何使用它快速搭建个人博客，并发布</p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ul>
-<li><p>Node环境</p>
-</li>
-<li><p>Git工具</p>
-</li>
-<li><p>GitHub账号</p>
-<a id="more"></a>
-
-</li>
+        <h2 id="阿里云Linux服务器启动Tomcat本地无法访问"><a href="#阿里云Linux服务器启动Tomcat本地无法访问" class="headerlink" title="阿里云Linux服务器启动Tomcat本地无法访问"></a>阿里云Linux服务器启动Tomcat本地无法访问</h2><p>[TOC]</p>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>记录一次linux开启Tomcat，在本地主机浏览器无法访问的问题。查了很多博客，大概的原因有：</p>
+<ul>
+<li>java环境是否安装正确</li>
+<li>Tomcat是否启动</li>
+<li>Linux服务器防火墙，是否开放了Tomcat运行端口（默认8080）</li>
 </ul>
-<h4 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h4><p><strong>1.下载</strong></p>
-<p>全局安装hexo脚手架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h4 id="java环境"><a href="#java环境" class="headerlink" title="java环境"></a>java环境</h4><p>Xshell进入linux系统，输入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 
-<p><strong>2.初始化</strong></p>
-<p>首先新建一个文件夹(这里我写的是blog)，在文件夹下召唤控制台，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>若出现</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589174695077.png" alt="1589174695077"></p>
+<p>表明已经安装jdk环境</p>
+<p>如果提示没有安装，则需要安装java环境</p>
+<h5 id="安装java"><a href="#安装java" class="headerlink" title="安装java"></a>安装java</h5><p>采用安装包的方式，先去oracle官网下载linux版64位的<code>tar.gz</code>的安装包</p>
+<p>使用Xftp工具连接，找到本地安装包，直接拖到服务器目录（这里是<code>/usr/local/</code>），如图</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589175161263.png" alt="1589175161263"></p>
+<p>切换到<code>/usr/local/</code>目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;</span><br></pre></td></tr></table></figure>
 
-<p>命令执行时会自动下载一个默认主题，这样一个初始化的博客网站就搭建成功了，接下来就可以启动了。</p>
-<p><strong>3.启动</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf &#x2F;usr&#x2F;local&#x2F;jdk-8u181-linux-x64.tar.gz(这里天文件名)</span><br></pre></td></tr></table></figure>
 
-<p>启动成功后，打开浏览器，访问提示端口</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951346638.png" alt="1581951346638"></p>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><h4 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h4><p>利用命令行或者手动创建，这里讲一下命令行</p>
-<p>进入控制台，切换到<code>source/_posts/</code>目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd source&#x2F;_posts&#x2F;</span><br></pre></td></tr></table></figure>
+<p>解压完后，查看一下目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll</span><br></pre></td></tr></table></figure>
 
-<p><strong>1.新建</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;名称&quot;</span><br></pre></td></tr></table></figure>
+<p>可以看到，解压后的文件夹</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176292201.png" alt="1589176292201"></p>
+<p>改一下这个文件夹的名字为java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv &#x2F;usr&#x2F;local&#x2F;jdk1.8.0_251 &#x2F;usr&#x2F;local&#x2F;java</span><br></pre></td></tr></table></figure>
 
-<p>执行完成后，就会在<code>source/_posts/</code>下生成一个文件</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951043333.png" alt="1581951043333"></p>
-<p><strong>2.使用markdown编辑器编辑好内容，保存退出！</strong></p>
-<p><strong>3.先清除</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<p>配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
-<p>再生成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>打开文件后，按a或i进入编辑模式，在文件最后添加如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br></pre></td></tr></table></figure>
 
-<p><strong>4.最后再次启动</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>按<code>esc</code>退出编辑模式，按<code>:</code>和<code>wq</code>保存修改</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176009254.png" alt="1589176009254"></p>
+<p>使配置文件生效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
-<p>就可以看到自己写的博客了</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581951493651.png" alt="1581951493651"></p>
-<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>自定义一个主题</p>
-<p>推荐：<code>https://github.com/litten/hexo-theme-yilia</code>,一个优雅简洁的主题</p>
-<p><strong>1.下载</strong></p>
-<p>从<code>blog/</code>下进入控制台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;litten&#x2F;hexo-theme-yilia.git themes&#x2F;yilia</span><br></pre></td></tr></table></figure>
+<p>建议重启服务器，之后再查看java版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 
-<p>会将主题下载到目录文件夹<code>themes/</code>下</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581952143237.png" alt="1581952143237"></p>
-<p><strong>2.修改配置</strong></p>
-<p>下载完成后，修改配置文件<code>_config.yml</code>,将<code>theme</code>换成自己要换的主题名</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581952318509.png" alt="1581952318509"></p>
-<p><strong>3.保存退出之后再先清除</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<p>输入<code>javac</code></p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176194761.png" alt="1589176194761"></p>
+<p>出现上图，说明java环境好了</p>
+<h4 id="Tomcat启动状态"><a href="#Tomcat启动状态" class="headerlink" title="Tomcat启动状态"></a>Tomcat启动状态</h4><p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;src&#x2F;apache-tomcat-7.0.103&#x2F;bin（填Tomcat的安装目录）</span><br><span class="line"></span><br><span class="line">.&#x2F;startup.sh</span><br></pre></td></tr></table></figure>
 
-<p><strong>再生成</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>出现下图，说明已启动</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176611743.png" alt="1589176611743"></p>
+<p>查看启动状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep tomcat</span><br></pre></td></tr></table></figure>
 
-<p><strong>4.启动</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>出现</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589176696960.png" alt="1589176696960"></p>
+<p>说明启动成功！</p>
+<h4 id="Linux服务器防火墙"><a href="#Linux服务器防火墙" class="headerlink" title="Linux服务器防火墙"></a>Linux服务器防火墙</h4><p>查看firewall服务状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
 
-<p>效果</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581996334437.png" alt="1581996334437"></p>
-<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><p>到目前为止，我们创建的博客只能在本地运行，只能本地主机访问，这样的博客网站是没有任何意义的，因此，我们要将它发布到服务器上，这里我们采用一个免费的方式，将它发布到github上</p>
-<p><strong>1.创建仓库</strong></p>
-<p>点击加号后，选择<code>new repository</code></p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953010935.png" alt="1581953010935"></p>
-<p>注意：新建的仓库名必须是：登录名+github.io</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953089980.png" alt="1581953089980"></p>
-<p>添加适当说明</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953253034.png" alt="1581953253034"></p>
-<p><strong>2.安装插件</strong></p>
-<p><code>hexo-deployer-git</code>：用将博客网站发布到远端的插件</p>
-<p>切换到<code>blog/</code>下，进入控制台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p>查看firewall的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
 
-<p><strong>3.修改配置文件</strong></p>
-<p>打开<code>_config.yml</code>，找到最底修改为</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953684839.png" alt="1581953684839"></p>
-<p><strong>4.发布</strong></p>
-<p>控制台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>这里有两种方式，一是关闭防火墙，而是开放8080端口</p>
+<p>方式一:关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service firewalld stop</span><br></pre></td></tr></table></figure>
 
-<p>刷新再进入到刚刚创建的仓库，我们就可以看到上传很多文件</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581953854742.png" alt="1581953854742"></p>
-<p>这样我们可以直接使用仓库名进行访问，例如：</p>
-<p>我这里使用：<code>http://chenhr24.github.io</code>访问</p>
-<p><img src="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/1581954376614.png" alt="1581954376614"></p>
-<h3 id="参-考-文-献"><a href="#参-考-文-献" class="headerlink" title="参 考 文 献"></a>参 考 文 献</h3><p>对帅王视屏的记录<a href="http://www.codesheep.cn" target="_blank" rel="noopener">www.codesheep.cn</a></p>
+<p>方式二：开放端口</p>
+<p>开放8080端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port&#x3D;8080&#x2F;tcp</span><br></pre></td></tr></table></figure>
+
+<p>查看防火墙规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
+
+<p>查询端口是否开放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port&#x3D;8080&#x2F;tcp</span><br></pre></td></tr></table></figure>
+
+<p>重启防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>到这里就解决了三个常见问题</p>
+<p>再去浏览器访问服务器8080端口，发现还是访问不了</p>
+<h4 id="阿里云控制台配置安全组"><a href="#阿里云控制台配置安全组" class="headerlink" title="阿里云控制台配置安全组"></a>阿里云控制台配置安全组</h4><p>进入，下图页面</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177252176.png" alt="1589177252176"></p>
+<p>添加一个规则</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177339255.png" alt="1589177339255"></p>
+<p>重启服务器</p>
+<p>再到浏览器访问</p>
+<p><img src="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/C:%5CUsers%5Cchr%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589177537203.png" alt="1589177537203"></p>
+<p>解决问题了！</p>
 
       
       
@@ -396,7 +392,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -410,18 +406,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/11/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8Tomcat%E6%9C%AC%E5%9C%B0%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Linux服务器启动Tomcat本地无法访问
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2020/02/17/%E4%B8%80%E7%A7%8D%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一种快速搭建个人博客网站的方式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -448,7 +435,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章"><span class="toc-number">1.</span> <span class="toc-text">第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搭建"><span class="toc-number">1.2.</span> <span class="toc-text">搭建</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章"><span class="toc-number">2.</span> <span class="toc-text">第二章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#写博客"><span class="toc-number">2.1.</span> <span class="toc-text">写博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更换主题"><span class="toc-number">2.2.</span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发布"><span class="toc-number">2.3.</span> <span class="toc-text">发布</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参-考-文-献"><span class="toc-number">3.</span> <span class="toc-text">参 考 文 献</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#阿里云Linux服务器启动Tomcat本地无法访问"><span class="toc-number">1.</span> <span class="toc-text">阿里云Linux服务器启动Tomcat本地无法访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述"><span class="toc-number">1.0.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#java环境"><span class="toc-number">1.0.2.</span> <span class="toc-text">java环境</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#安装java"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">安装java</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tomcat启动状态"><span class="toc-number">1.0.3.</span> <span class="toc-text">Tomcat启动状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux服务器防火墙"><span class="toc-number">1.0.4.</span> <span class="toc-text">Linux服务器防火墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#阿里云控制台配置安全组"><span class="toc-number">1.0.5.</span> <span class="toc-text">阿里云控制台配置安全组</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -478,7 +465,7 @@ if(true){
   	repo: 'Gittalk',
   	owner: 'chenhr24',
   	admin: ['chenhr24.github.io'],
-  	id: 'Mon Feb 17 2020 21:48:47 GMT+0800',
+  	id: 'Mon May 11 2020 14:11:25 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
